@@ -1,0 +1,2054 @@
+<!DOCTYPE html><html lang="es"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Plataforma SaaS para la Gestión de Documentos Legales en Argentina</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Crimson Text', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'sage': {
+                            50: '#f6f7f6',
+                            100: '#e3e7e3',
+                            200: '#c7cfc7',
+                            300: '#a0aea0',
+                            400: '#748574',
+                            500: '#576957',
+                            600: '#445544',
+                            700: '#384438',
+                            800: '#2f372f',
+                            900: '#292f29',
+                        },
+                        'warm': {
+                            50: '#fdfbf8',
+                            100: '#faf5ed',
+                            200: '#f4e9d3',
+                            300: '#ecd9b0',
+                            400: '#e2c485',
+                            500: '#d7ae62',
+                            600: '#c89747',
+                            700: '#a67c3b',
+                            800: '#866334',
+                            900: '#6e522e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+  </head>
+
+  <body class="bg-warm-50 text-sage-900 font-sans antialiased overflow-x-hidden">
+
+    <!-- Fixed Table of Contents -->
+    <nav id="toc" class="fixed left-0 top-0 h-screen w-80 bg-white shadow-lg z-50 overflow-y-auto border-r border-sage-200 transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
+      <div class="p-6">
+        <div class="mb-8">
+          <h3 class="text-lg font-semibold text-sage-800 mb-2">Tabla de Contenidos</h3>
+          <div class="w-12 h-0.5 bg-warm-400"></div>
+        </div>
+
+        <ul class="space-y-3 text-sm">
+          <li>
+            <a class="text-sage-600 hover:text-sage-800 transition-colors block py-1" href="#hero">Introducción</a>
+          </li>
+          <li>
+            <a class="text-sage-600 hover:text-sage-800 transition-colors block py-1" href="#executive-summary">Resumen Ejecutivo</a>
+          </li>
+          <li>
+            <a class="text-sage-600 hover:text-sage-800 transition-colors block py-1" href="#legal-framework">Marco Legal y Tecnológico</a>
+            <ul class="ml-4 mt-2 space-y-2 text-xs">
+              <li>
+                <a class="text-sage-500 hover:text-sage-700 transition-colors block py-1" href="#law-25506">Ley 25.506</a>
+              </li>
+              <li>
+                <a class="text-sage-500 hover:text-sage-700 transition-colors block py-1" href="#legal-validity">Validez Probatoria</a>
+              </li>
+              <li>
+                <a class="text-sage-500 hover:text-sage-700 transition-colors block py-1" href="#certifying-entities">Entidades Certificantes</a>
+              </li>
+              <li>
+                <a class="text-sage-500 hover:text-sage-700 transition-colors block py-1" href="#cryptographic-standards">Estándares Criptográficos</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a class="text-sage-600 hover:text-sage-800 transition-colors block py-1" href="#architecture">Arquitectura y Tecnologías</a>
+            <ul class="ml-4 mt-2 space-y-2 text-xs">
+              <li>
+                <a class="text-sage-500 hover:text-sage-700 transition-colors block py-1" href="#frontend">Frontend</a>
+              </li>
+              <li>
+                <a class="text-sage-500 hover:text-sage-700 transition-colors block py-1" href="#backend">Backend</a>
+              </li>
+              <li>
+                <a class="text-sage-500 hover:text-sage-700 transition-colors block py-1" href="#database">Base de Datos</a>
+              </li>
+              <li>
+                <a class="text-sage-500 hover:text-sage-700 transition-colors block py-1" href="#cloud-hosting">Cloud Hosting</a>
+              </li>
+              <li>
+                <a class="text-sage-500 hover:text-sage-700 transition-colors block py-1" href="#security">Seguridad</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a class="text-sage-600 hover:text-sage-800 transition-colors block py-1" href="#mvp-features">Funcionalidades Clave (MVP)</a>
+            <ul class="ml-4 mt-2 space-y-2 text-xs">
+              <li>
+                <a class="text-sage-500 hover:text-sage-700 transition-colors block py-1" href="#document-management">Gestión de Documentos</a>
+              </li>
+              <li>
+                <a class="text-sage-500 hover:text-sage-700 transition-colors block py-1" href="#version-control">Control de Versiones</a>
+              </li>
+              <li>
+                <a class="text-sage-500 hover:text-sage-700 transition-colors block py-1" href="#signature-flow">Flujo de Firma</a>
+              </li>
+              <li>
+                <a class="text-sage-500 hover:text-sage-700 transition-colors block py-1" href="#traceability">Trazabilidad Completa</a>
+              </li>
+              <li>
+                <a class="text-sage-500 hover:text-sage-700 transition-colors block py-1" href="#notifications">Sistema de Notificaciones</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button id="toc-toggle" class="fixed top-4 left-4 z-50 lg:hidden bg-white shadow-lg rounded-full p-3 text-sage-700 hover:text-sage-900 transition-colors">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Overlay for mobile TOC -->
+    <div id="toc-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
+
+    <!-- Main Content -->
+    <main class="lg:ml-80">
+
+      <!-- Hero Section -->
+      <section class="relative bg-gradient-to-br from-sage-800 via-sage-700 to-sage-900 text-white overflow-hidden" id="hero">
+        <div class="absolute inset-0 opacity-10">
+          <img alt="Bufete de abogados moderno" class="w-full h-full object-cover" src="https://kimi-web-img.moonshot.cn/img/www.ofitipo.com/ce66356990fbe748fca12d70a6d60d54f1cd7101.png" size="wallpaper" aspect="wide" style="photo" query="bufete de abogados moderno" referrerpolicy="no-referrer" data-modified="1" data-score="11599.00"/>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-4 sm:px-6 md:px-8 py-16">
+          <div class="flex flex-col lg:grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+              <div class="space-y-4">
+                <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight italic">
+                  Modernizando la
+                  <span class="text-warm-300">Gestión Legal</span>
+                  en Argentina
+                </h1>
+                <p class="text-base sm:text-xl text-sage-100 leading-relaxed max-w-2xl">
+                  Una plataforma SaaS integral que transforma el intercambio y gestión de documentos legales mediante firma digital, trazabilidad completa y seguridad de última generación.
+                </p>
+              </div>
+
+              <div class="flex flex-wrap gap-4">
+                <div class="bg-warm-500/20 backdrop-blur-sm rounded-lg px-4 py-3 border border-warm-400/30">
+                  <div class="text-2xl font-bold text-warm-300">Ley 25.506</div>
+                  <div class="text-sm text-sage-200">Marco Legal Argentino</div>
+                </div>
+                <div class="bg-warm-500/20 backdrop-blur-sm rounded-lg px-4 py-3 border border-warm-400/30">
+                  <div class="text-2xl font-bold text-warm-300">100%</div>
+                  <div class="text-sm text-sage-200">Validez Legal</div>
+                </div>
+                <div class="bg-warm-500/20 backdrop-blur-sm rounded-lg px-4 py-3 border border-warm-400/30">
+                  <div class="text-2xl font-bold text-warm-300">ACs</div>
+                  <div class="text-sm text-sage-200">Entidades Certificantes</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:pl-12">
+              <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+                <h3 class="text-xl font-semibold mb-6 text-warm-200">Componentes Clave</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-3">
+                      <i class="fas fa-shield-alt text-warm-300"></i>
+                      <span class="text-sm">Firma Digital</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                      <i class="fas fa-file-contract text-warm-300"></i>
+                      <span class="text-sm">Gestión Documental</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                      <i class="fas fa-history text-warm-300"></i>
+                      <span class="text-sm">Control de Versiones</span>
+                    </div>
+                  </div>
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-3">
+                      <i class="fas fa-search text-warm-300"></i>
+                      <span class="text-sm">Trazabilidad Completa</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                      <i class="fas fa-bell text-warm-300"></i>
+                      <span class="text-sm">Notificaciones</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                      <i class="fas fa-cloud text-warm-300"></i>
+                      <span class="text-sm">Infraestructura Cloud</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Executive Summary -->
+      <section class="py-16 bg-white" id="executive-summary">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
+          <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+              <h2 class="font-serif text-4xl font-semibold text-sage-800 mb-4">Resumen Ejecutivo</h2>
+              <div class="w-24 h-1 bg-warm-400 mx-auto"></div>
+            </div>
+
+            <div class="prose prose-lg max-w-none">
+              <div class="bg-sage-50 rounded-2xl p-8 border-l-4 border-warm-400 mb-8">
+                <p class="text-lg text-sage-800 leading-relaxed mb-6">
+                  La plataforma SaaS propuesta para la gestión de documentos legales en Argentina se fundamenta en la <strong class="text-sage-900">Ley 25.506 de Firma Digital</strong>, la cual distingue entre firma digital (con mayores garantías legales y presunciones de autoría e integridad) y firma electrónica.
+                </p>
+
+                <p class="text-lg text-sage-800 leading-relaxed mb-6">
+                  Para la validez legal de la firma digital, es <strong class="text-sage-900">imprescindible la integración con Autoridades Certificantes (ACs) licenciadas en Argentina</strong>, que emiten los certificados digitales necesarios.
+                </p>
+
+                <p class="text-lg text-sage-800 leading-relaxed">
+                  El stack tecnológico recomendado incluye <strong class="text-sage-900">React para el frontend, Python con FastAPI para el backend, y PostgreSQL para la base de datos</strong>, alojados en un proveedor de nube como <strong class="text-sage-900">Google Cloud Platform (GCP)</strong>, complementado con medidas de seguridad robustas.
+                </p>
+              </div>
+
+              <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6 bg-warm-50 rounded-xl">
+                  <i class="fas fa-gavel text-3xl text-warm-600 mb-4"></i>
+                  <h3 class="font-semibold text-sage-800 mb-2">Marco Legal</h3>
+                  <p class="text-sm text-sage-600">Basado en Ley 25.506 y entidades certificantes licenciadas</p>
+                </div>
+                <div class="text-center p-6 bg-warm-50 rounded-xl">
+                  <i class="fas fa-cogs text-3xl text-warm-600 mb-4"></i>
+                  <h3 class="font-semibold text-sage-800 mb-2">Tecnología</h3>
+                  <p class="text-sm text-sage-600">Stack moderno con React, FastAPI y PostgreSQL</p>
+                </div>
+                <div class="text-center p-6 bg-warm-50 rounded-xl">
+                  <i class="fas fa-shield-alt text-3xl text-warm-600 mb-4"></i>
+                  <h3 class="font-semibold text-sage-800 mb-2">Seguridad</h3>
+                  <p class="text-sm text-sage-600">Medidas robustas de cifrado y autenticación</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Legal Framework Section -->
+      <section class="py-20 bg-sage-50" id="legal-framework">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
+          <div class="text-center mb-16">
+            <h2 class="font-serif text-4xl font-semibold text-sage-800 mb-4">Marco Legal y Tecnológico</h2>
+            <p class="text-xl text-sage-600 max-w-3xl mx-auto">Fundamentos jurídicos y técnicos para la implementación de firmas digitales en Argentina</p>
+            <div class="w-24 h-1 bg-warm-400 mx-auto mt-6"></div>
+          </div>
+
+          <!-- Ley 25.506 -->
+          <div class="mb-16" id="law-25506">
+            <div class="max-w-4xl mx-auto">
+              <h3 class="font-serif text-3xl font-semibold text-sage-800 mb-8">Ley 25.506: Firma Digital y Firma Electrónica</h3>
+
+              <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white rounded-xl p-8 shadow-sm border border-sage-200">
+                  <h4 class="text-xl font-semibold text-sage-800 mb-4 flex items-center">
+                    <i class="fas fa-certificate text-warm-600 mr-3"></i>
+                    Firma Digital
+                  </h4>
+                  <p class="text-sage-700 mb-4">
+                    &#34;El resultado de aplicar a un documento digital un procedimiento matemático que requiere información de exclusivo conocimiento del firmante, encontrándose ésta bajo su absoluto control&#34;
+                  </p>
+                  <div class="space-y-2">
+                    <div class="flex items-center text-sm text-sage-600">
+                      <i class="fas fa-check text-green-500 mr-2"></i>
+                      Presunción de autoría e integridad
+                    </div>
+                    <div class="flex items-center text-sm text-sage-600">
+                      <i class="fas fa-check text-green-500 mr-2"></i>
+                      Validez equiparable a firma manuscrita
+                    </div>
+                    <div class="flex items-center text-sm text-sage-600">
+                      <i class="fas fa-check text-green-500 mr-2"></i>
+                      Requiere certificado de AC licenciada
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-sm border border-sage-200">
+                  <h4 class="text-xl font-semibold text-sage-800 mb-4 flex items-center">
+                    <i class="fas fa-signature text-warm-600 mr-3"></i>
+                    Firma Electrónica
+                  </h4>
+                  <p class="text-sage-700 mb-4">
+                    &#34;Conjunto de datos electrónicos integrados, ligados o asociados de manera lógica a otros datos electrónicos, utilizado por el signatario como su medio de identificación&#34;
+                  </p>
+                  <div class="space-y-2">
+                    <div class="flex items-center text-sm text-sage-600">
+                      <i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>
+                      Carece de requisitos legales completos
+                    </div>
+                    <div class="flex items-center text-sm text-sage-600">
+                      <i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>
+                      Requiere acreditación de validez
+                    </div>
+                    <div class="flex items-center text-sm text-sage-600">
+                      <i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>
+                      Menor fuerza probatoria
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-xl">
+                <h4 class="font-semibold text-blue-800 mb-2">Requisitos para Validez Legal (Artículo 9°)</h4>
+                <ol class="list-decimal list-inside space-y-2 text-blue-700">
+                  <li>Haber sido creada durante el período de vigencia del certificado digital válido</li>
+                  <li>Ser debidamente verificada por referencia a los datos de verificación</li>
+                  <li>Que el certificado haya sido emitido por un certificador licenciado</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- Legal Validity -->
+          <div class="mb-16" id="legal-validity">
+            <div class="max-w-4xl mx-auto">
+              <h3 class="font-serif text-3xl font-semibold text-sage-800 mb-8">Validez Probatoria y Presunciones Legales</h3>
+
+              <div class="space-y-6">
+                <div class="bg-white rounded-xl p-8 shadow-sm border border-sage-200">
+                  <h4 class="text-xl font-semibold text-sage-800 mb-4">Presunciones Legales de la Firma Digital</h4>
+
+                  <div class="grid md:grid-cols-2 gap-6">
+                    <div class="border-l-4 border-green-400 pl-6">
+                      <h5 class="font-semibold text-sage-800 mb-2">Presunción de Autoría (Artículo 7°)</h5>
+                      <p class="text-sage-700 text-sm">
+                        &#34;Se presume, salvo prueba en contrario, que toda firma digital pertenece al titular del certificado digital que permite la verificación de dicha firma&#34;
+                      </p>
+                    </div>
+
+                    <div class="border-l-4 border-green-400 pl-6">
+                      <h5 class="font-semibold text-sage-800 mb-2">Presunción de Integridad (Artículo 8°)</h5>
+                      <p class="text-sage-700 text-sm">
+                        &#34;Si el resultado de un procedimiento de verificación de una firma digital aplicado a un documento digital es verdadero, se presume, salvo prueba en contrario, que este documento digital no ha sido modificado desde el momento de su firma&#34;
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-6">
+                  <div class="flex items-start">
+                    <i class="fas fa-exclamation-triangle text-amber-600 text-xl mr-4 mt-1"></i>
+                    <div>
+                      <h4 class="font-semibold text-amber-800 mb-2">Firma Electrónica: Carga Probatoria</h4>
+                      <p class="text-amber-700">
+                        En caso de ser desconocida la firma electrónica, corresponde a quien la invoca acreditar su validez. No goza de las mismas presunciones legales que la firma digital.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certifying Entities -->
+          <div class="mb-16" id="certifying-entities">
+            <div class="max-w-6xl mx-auto">
+              <h3 class="font-serif text-3xl font-semibold text-sage-800 mb-8">Entidades Certificantes Licenciadas (ACs) en Argentina</h3>
+
+              <div class="mb-8">
+                <div class="bg-white rounded-xl p-8 shadow-sm border border-sage-200">
+                  <p class="text-sage-700 mb-6">
+                    Las Autoridades Certificantes Licenciadas son fundamentales dentro de la Infraestructura de Firma Digital de la República Argentina (IFDRA). Es <strong class="text-sage-900">imprescindible la integración con una o más ACs licenciadas</strong> para poder emitir firmas digitales con plena validez legal.
+                  </p>
+
+                  <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                      <thead class="bg-sage-100">
+                        <tr>
+                          <th class="text-left p-4 font-semibold text-sage-800">Entidad Certificante (AC)</th>
+                          <th class="text-left p-4 font-semibold text-sage-800">Tipo</th>
+                          <th class="text-left p-4 font-semibold text-sage-800">Licencia Vigente Hasta (aprox.)</th>
+                          <th class="text-left p-4 font-semibold text-sage-800">Observaciones</th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-sage-200">
+                        <tr>
+                          <td class="p-4 text-sage-700">AC ONTI</td>
+                          <td class="p-4"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Pública</span></td>
+                          <td class="p-4 text-sage-700">Nov 2025 / Jun 2025</td>
+                          <td class="p-4 text-sage-600">Pertenece al ámbito gubernamental</td>
+                        </tr>
+                        <tr>
+                          <td class="p-4 text-sage-700">AC MODERNIZACIÓN PFDR</td>
+                          <td class="p-4"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Pública</span></td>
+                          <td class="p-4 text-sage-700">Oct 2025</td>
+                          <td class="p-4 text-sage-600">Plataforma de Firma Digital Remota del Gobierno Nacional</td>
+                        </tr>
+                        <tr>
+                          <td class="p-4 text-sage-700">AC ENCODE S. A.</td>
+                          <td class="p-4"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Privada</span></td>
+                          <td class="p-4 text-sage-700">Dic 2028 / Ene 2028</td>
+                          <td class="p-4 text-sage-600">Una de las primeras certificadoras privadas</td>
+                        </tr>
+                        <tr>
+                          <td class="p-4 text-sage-700">AC LAKAUT S. A.</td>
+                          <td class="p-4"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Privada</span></td>
+                          <td class="p-4 text-sage-700">Dic 2029</td>
+                          <td class="p-4 text-sage-600">Entidad privada licenciada</td>
+                        </tr>
+                        <tr>
+                          <td class="p-4 text-sage-700">AC BOX CUSTODIA DE ARCHIVOS S. A.</td>
+                          <td class="p-4"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Privada</span></td>
+                          <td class="p-4 text-sage-700">Jun 2030 / Dic 2029</td>
+                          <td class="p-4 text-sage-600">Entidad privada licenciada</td>
+                        </tr>
+                        <tr>
+                          <td class="p-4 text-sage-700">AC DIGILOGIX S. A.</td>
+                          <td class="p-4"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Privada</span></td>
+                          <td class="p-4 text-sage-700">Dic 2029 / Jun 2030</td>
+                          <td class="p-4 text-sage-600">Entidad privada licenciada</td>
+                        </tr>
+                        <tr>
+                          <td class="p-4 text-sage-700">AC de la Infraestructura de Firma Digital de AFIP (ARCA)</td>
+                          <td class="p-4"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Pública</span></td>
+                          <td class="p-4 text-sage-700">Sin licencia vigente (AC principal)</td>
+                          <td class="p-4 text-sage-600">Emite certificados para trámites AFIP; certificados emitidos siguen válidos</td>
+                        </tr>
+                        <tr>
+                          <td class="p-4 text-sage-700">AC ANSeS</td>
+                          <td class="p-4"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Pública</span></td>
+                          <td class="p-4 text-sage-700">Sin licencia vigente (AC principal)</td>
+                          <td class="p-4 text-sage-600">Proporciona servicios de certificación; certificados emitidos siguen válidos</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <p class="text-xs text-sage-500 mt-4">
+                    Fuente: <a class="text-warm-600 hover:text-warm-700" href="https://www.argentina.gob.ar/jefatura/innovacion-ciencia-y-tecnologia/innovacion/firma-digital/certificadores-licenciados" target="_blank">argentina.gob.ar</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+                <h4 class="font-semibold text-green-800 mb-3 flex items-center">
+                  <i class="fas fa-calendar-check text-green-600 mr-2"></i>
+                  Actualización Normativa: Decreto 743/2024
+                </h4>
+                <p class="text-green-700 mb-3">
+                  Permite que la verificación de identidad para la emisión, renovación o revocación de certificados digitales se realice tanto de manera presencial como <strong>remota</strong>, mediante servicios de validación en tiempo real.
+                </p>
+                <p class="text-green-700 text-sm">
+                  Esto elimina la obligatoriedad de la presencia física del solicitante, agilizando y simplificando considerablemente el proceso de obtención de un certificado digital.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cryptographic Standards -->
+          <div id="cryptographic-standards">
+            <div class="max-w-4xl mx-auto">
+              <h3 class="font-serif text-3xl font-semibold text-sage-800 mb-8">Tecnologías y Estándares Criptográficos Aprobados</h3>
+
+              <div class="grid lg:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                  <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                    <h4 class="text-lg font-semibold text-sage-800 mb-4">Estándares Técnicos</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start">
+                        <i class="fas fa-key text-warm-600 mr-3 mt-1"></i>
+                        <div>
+                          <strong class="text-sage-800">Criptografía Asimétrica</strong>
+                          <p class="text-sm text-sage-600">Par de claves: privada para firmar y pública para verificar</p>
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="fas fa-certificate text-warm-600 mr-3 mt-1"></i>
+                        <div>
+                          <strong class="text-sage-800">Estándar X.509</strong>
+                          <p class="text-sm text-sage-600">Formato internacional para certificados digitales</p>
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="fas fa-shield-alt text-warm-600 mr-3 mt-1"></i>
+                        <div>
+                          <strong class="text-sage-800">Algoritmos Criptográficos</strong>
+                          <p class="text-sm text-sage-600">RSA (2048+ bits) y ECDSA con curvas elípticas</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                    <h4 class="text-lg font-semibold text-sage-800 mb-4">Sistemas Técnicamente Confiables</h4>
+                    <p class="text-sage-700 text-sm mb-4">
+                      Deben cumplir requisitos como resguardar contra intrusión, asegurar disponibilidad, confiabilidad, confidencialidad, y cumplir normas de seguridad según estándares internacionales.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="space-y-6">
+                  <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                    <h4 class="text-lg font-semibold text-sage-800 mb-4">Dispositivos de Creación de Firma</h4>
+
+                    <div class="space-y-4">
+                      <div class="border-l-4 border-blue-400 pl-4">
+                        <h5 class="font-semibold text-sage-800">Tokens USB / Smart Cards</h5>
+                        <p class="text-sm text-sage-600">Almacenan claves privadas de forma segura dentro del dispositivo</p>
+                      </div>
+
+                      <div class="border-l-4 border-amber-400 pl-4">
+                        <h5 class="font-semibold text-sage-800">Certificados Software</h5>
+                        <p class="text-sm text-sage-600">Instalados directamente en la computadora del usuario</p>
+                      </div>
+
+                      <div class="border-l-4 border-green-400 pl-4">
+                        <h5 class="font-semibold text-sage-800">Firma Digital Remota</h5>
+                        <p class="text-sm text-sage-600">Firma en la nube con custodia centralizada de claves en HSM</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+                    <h4 class="font-semibold text-yellow-800 mb-2 flex items-center">
+                      <i class="fas fa-tools text-yellow-600 mr-2"></i>
+                      Requisitos para Plataformas de Terceros
+                    </h4>
+                    <p class="text-yellow-700 text-sm">
+                      Deben asegurar que los métodos de firma y certificados cumplan con los estándares y políticas de las ACs licenciadas con las que se integren, incluyendo gestión segura de claves y cumplimiento de Políticas de Certificación.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Architecture Section -->
+      <section class="py-20 bg-white" id="architecture">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
+          <div class="text-center mb-16">
+            <h2 class="font-serif text-4xl font-semibold text-sage-800 mb-4">Arquitectura y Tecnologías Recomendadas</h2>
+            <p class="text-xl text-sage-600 max-w-3xl mx-auto">Stack tecnológico diseñado para alta seguridad, escalabilidad y excelente experiencia de usuario</p>
+            <div class="w-24 h-1 bg-warm-400 mx-auto mt-6"></div>
+          </div>
+
+          <!-- Tech Stack Overview -->
+          <div class="mb-16">
+            <div class="max-w-6xl mx-auto">
+              <div class="grid lg:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 text-center border border-blue-200">
+                  <i class="fab fa-react text-4xl text-blue-600 mb-4"></i>
+                  <h3 class="font-semibold text-sage-800 mb-2">Frontend</h3>
+                  <p class="text-lg font-bold text-blue-700 mb-2">React</p>
+                  <p class="text-sm text-sage-600">Componentes reutilizables, Virtual DOM, ecosistema robusto</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 text-center border border-green-200">
+                  <i class="fab fa-python text-4xl text-green-600 mb-4"></i>
+                  <h3 class="font-semibold text-sage-800 mb-2">Backend</h3>
+                  <p class="text-lg font-bold text-green-700 mb-2">Python + FastAPI</p>
+                  <p class="text-sm text-sage-600">Alto rendimiento, validación automática, documentación API</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-8 text-center border border-purple-200">
+                  <i class="fas fa-database text-4xl text-purple-600 mb-4"></i>
+                  <h3 class="font-semibold text-sage-800 mb-2">Base de Datos</h3>
+                  <p class="text-lg font-bold text-purple-700 mb-2">PostgreSQL</p>
+                  <p class="text-sm text-sage-600">ACID compliance, seguridad avanzada, soporte JSONB</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-8 text-center border border-orange-200">
+                  <i class="fas fa-cloud text-4xl text-orange-600 mb-4"></i>
+                  <h3 class="font-semibold text-sage-800 mb-2">Cloud</h3>
+                  <p class="text-lg font-bold text-orange-700 mb-2">Google Cloud</p>
+                  <p class="text-sm text-sage-600">Escalabilidad global, servicios administrados, seguridad</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Detailed Tech Stack -->
+          <div class="space-y-16">
+            <!-- Frontend -->
+            <div id="frontend">
+              <div class="max-w-4xl mx-auto">
+                <h3 class="font-serif text-3xl font-semibold text-sage-800 mb-8">Frontend: React</h3>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                  <div class="space-y-6">
+                    <div class="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                      <h4 class="font-semibold text-blue-800 mb-4">Ventajas Clave</h4>
+                      <ul class="space-y-3">
+                        <li class="flex items-start">
+                          <i class="fas fa-puzzle-piece text-blue-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-blue-800">Arquitectura basada en componentes</strong>
+                            <p class="text-sm text-blue-700">Componentes reutilizables e independientes</p>
+                          </div>
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-tachometer-alt text-blue-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-blue-800">Virtual DOM</strong>
+                            <p class="text-sm text-blue-700">Actualizaciones rápidas de la interfaz</p>
+                          </div>
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-users text-blue-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-blue-800">Gran comunidad y ecosistema</strong>
+                            <p class="text-sm text-blue-700">Bibliotecas, herramientas y recursos abundantes</p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Optimización del Rendimiento</h4>
+                      <div class="space-y-2 text-sm">
+                        <div class="flex items-center text-sage-700">
+                          <i class="fas fa-code text-warm-600 mr-2"></i>
+                          División de código con React.lazy y Suspense
+                        </div>
+                        <div class="flex items-center text-sage-700">
+                          <i class="fas fa-memory text-warm-600 mr-2"></i>
+                          Memoización con React.memo, useCallback, useMemo
+                        </div>
+                        <div class="flex items-center text-sage-700">
+                          <i class="fas fa-list text-warm-600 mr-2"></i>
+                          Desplazamiento virtual para listas largas
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Experiencia del Desarrollador</h4>
+                      <p class="text-sage-700 mb-4">
+                        React ofrece una excelente experiencia de desarrollo con sintaxis JSX y Hooks que simplifican la lógica y mejoran la reutilización.
+                      </p>
+                      <div class="bg-sage-50 rounded-lg p-4">
+                        <p class="text-sm text-sage-600">
+                          <strong>Integración con TypeScript:</strong> Proporciona tipado estático que ayuda a detectar errores en tiempo de compilación.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+                      <h4 class="font-semibold text-green-800 mb-3">
+                        <i class="fas fa-rocket text-green-600 mr-2"></i>
+                        Casos de Éxito
+                      </h4>
+                      <p class="text-green-700 text-sm mb-3">
+                        Utilizado por gigantes tecnológicos como Facebook, Instagram, Netflix y WhatsApp Web, demostrando su robustez y escalabilidad.
+                      </p>
+                      <p class="text-green-700 text-sm">
+                        Frameworks como Next.js ofrecen funcionalidades avanzadas como SSR y SSG para mejorar tiempos de carga y SEO.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Backend -->
+            <div id="backend">
+              <div class="max-w-4xl mx-auto">
+                <h3 class="font-serif text-3xl font-semibold text-sage-800 mb-8">Backend: Python con FastAPI</h3>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                  <div class="space-y-6">
+                    <div class="bg-green-50 rounded-xl p-6 border border-green-200">
+                      <h4 class="font-semibold text-green-800 mb-4">¿Por qué FastAPI?</h4>
+                      <ul class="space-y-3">
+                        <li class="flex items-start">
+                          <i class="fas fa-bolt text-green-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-green-800">Alto rendimiento</strong>
+                            <p class="text-sm text-green-700">Velocidad comparable a NodeJS y Go</p>
+                          </div>
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-check-double text-green-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-green-800">Validación automática</strong>
+                            <p class="text-sm text-green-700">Basado en anotaciones de tipo Python</p>
+                          </div>
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-file-alt text-green-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-green-800">Documentación API automática</strong>
+                            <p class="text-sm text-green-700">OpenAPI y ReDoc integrados</p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Seguridad Integrada</h4>
+                      <div class="space-y-3">
+                        <div class="flex items-center">
+                          <i class="fas fa-key text-warm-600 mr-3"></i>
+                          <span class="text-sm text-sage-700">Soporte robusto para OAuth2 con JWT</span>
+                        </div>
+                        <div class="flex items-center">
+                          <i class="fas fa-shield-alt text-warm-600 mr-3"></i>
+                          <span class="text-sm text-sage-700">Autenticación HTTP Basic</span>
+                        </div>
+                        <div class="flex items-center">
+                          <i class="fas fa-cogs text-warm-600 mr-3"></i>
+                          <span class="text-sm text-sage-700">Inyección de dependencias para gestión de autenticación</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Características Técnicas</h4>
+                      <div class="space-y-4">
+                        <div class="border-l-4 border-green-400 pl-4">
+                          <h5 class="font-semibold text-sage-800">Serialización Automática</h5>
+                          <p class="text-sm text-sage-600">Impulsada por Pydantic para validación de datos entrantes y serialización a JSON</p>
+                        </div>
+                        <div class="border-l-4 border-green-400 pl-4">
+                          <h5 class="font-semibold text-sage-800">Concurrencia</h5>
+                          <p class="text-sm text-sage-600">Ideal para manejar múltiples solicitudes de forma concurrente</p>
+                        </div>
+                        <div class="border-l-4 border-green-400 pl-4">
+                          <h5 class="font-semibold text-sage-800">Documentación Clara</h5>
+                          <p class="text-sm text-sage-600">Documentación oficial extensa y comunidad en crecimiento</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                      <h4 class="font-semibold text-blue-800 mb-3">
+                        <i class="fas fa-balance-scale text-blue-600 mr-2"></i>
+                        Comparativa con Otras Opciones
+                      </h4>
+                      <p class="text-blue-700 text-sm">
+                        Python con FastAPI ofrece una combinación única de simplicidad, rendimiento y características modernas, logrando un equilibrio favorable para el backend de esta plataforma LegalTech, especialmente comparado con Node.js o Java con Spring Boot.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Database -->
+            <div id="database">
+              <div class="max-w-4xl mx-auto">
+                <h3 class="font-serif text-3xl font-semibold text-sage-800 mb-8">Base de Datos: PostgreSQL</h3>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                  <div class="space-y-6">
+                    <div class="bg-purple-50 rounded-xl p-6 border border-purple-200">
+                      <h4 class="font-semibold text-purple-800 mb-4">Características Principales</h4>
+                      <ul class="space-y-3">
+                        <li class="flex items-start">
+                          <i class="fas fa-database text-purple-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-purple-800">RDBMS de código abierto</strong>
+                            <p class="text-sm text-purple-700">Potente, escalable y altamente confiable</p>
+                          </div>
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-atom text-purple-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-purple-800">Transacciones ACID</strong>
+                            <p class="text-sm text-purple-700">Garantías de Atomicidad, Consistencia, Aislamiento y Durabilidad</p>
+                          </div>
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-code text-purple-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-purple-800">Soporte JSON/JSONB</strong>
+                            <p class="text-sm text-purple-700">Combina flexibilidad NoSQL con potencia SQL</p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Seguridad Avanzada</h4>
+                      <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div class="space-y-2">
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-user-shield text-warm-600 mr-2"></i>
+                            Autenticación robusta
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-users-cog text-warm-600 mr-2"></i>
+                            RBAC granular
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-eye text-warm-600 mr-2"></i>
+                            Enmascaramiento de datos
+                          </div>
+                        </div>
+                        <div class="space-y-2">
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-search text-warm-600 mr-2"></i>
+                            Auditoría (pgAudit)
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-lock text-warm-600 mr-2"></i>
+                            Cifrado en reposo/tránsito
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-shield-alt text-warm-600 mr-2"></i>
+                            Row Level Security
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Escalabilidad y Rendimiento</h4>
+                      <div class="space-y-4">
+                        <div class="flex items-start">
+                          <i class="fas fa-network-wired text-warm-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-sage-800">Conexiones concurrentes</strong>
+                            <p class="text-sm text-sage-600">Soporta gran cantidad de conexiones simultáneas</p>
+                          </div>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-tachometer-alt text-warm-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-sage-800">Índices avanzados</strong>
+                            <p class="text-sm text-sage-600">Optimización para consultas complejas</p>
+                          </div>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-copy text-warm-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-sage-800">Replicación nativa</strong>
+                            <p class="text-sm text-sage-600">Alta disponibilidad y balanceo de carga</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+                      <h4 class="font-semibold text-yellow-800 mb-3">
+                        <i class="fas fa-balance-scale text-yellow-600 mr-2"></i>
+                        Comparativa con NoSQL
+                      </h4>
+                      <p class="text-yellow-700 text-sm">
+                        PostgreSQL ofrece mayores garantías de integridad y consistencia que bases de datos NoSQL como MongoDB, lo cual es crítico en el ámbito legal. El soporte JSONB proporciona flexibilidad donde sea necesario sin sacrificar las ventajas de un RDBMS.
+                      </p>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                      <h4 class="font-semibold text-blue-800 mb-3">
+                        <i class="fas fa-gavel text-blue-600 mr-2"></i>
+                        Cumplimiento Normativo
+                      </h4>
+                      <p class="text-blue-700 text-sm">
+                        PostgreSQL ayuda a cumplir con normativas locales como la Ley 25.326 de Protección de Datos Personales, proporcionando los mecanismos de seguridad y auditoría necesarios para el manejo de información sensible.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cloud Hosting -->
+            <div id="cloud-hosting">
+              <div class="max-w-4xl mx-auto">
+                <h3 class="font-serif text-3xl font-semibold text-sage-800 mb-8">Cloud Hosting: Google Cloud Platform</h3>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                  <div class="space-y-6">
+                    <div class="bg-orange-50 rounded-xl p-6 border border-orange-200">
+                      <h4 class="font-semibold text-orange-800 mb-4">Recomendación: Google Cloud</h4>
+                      <p class="text-orange-700 mb-4">
+                        Para el mercado argentino, se recomienda Google Cloud Platform (GCP) como proveedor principal, considerando su compromiso con el cumplimiento normativo en Argentina y su robusto portafolio de servicios.
+                      </p>
+
+                      <div class="space-y-3">
+                        <div class="flex items-start">
+                          <i class="fas fa-globe text-orange-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-orange-800">Infraestructura Global</strong>
+                            <p class="text-sm text-orange-700">Base sólida para aplicaciones escalables y de alto rendimiento</p>
+                          </div>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-check-circle text-orange-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-orange-800">Cumplimiento Normativo</strong>
+                            <p class="text-sm text-orange-700">Adaptaciones para BCRA y Ley de Protección de Datos</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Servicios Clave de GCP</h4>
+                      <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div class="space-y-2">
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-cubes text-warm-600 mr-2"></i>
+                            Google Kubernetes Engine
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-database text-warm-600 mr-2"></i>
+                            Cloud SQL (PostgreSQL)
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-archive text-warm-600 mr-2"></i>
+                            Cloud Storage
+                          </div>
+                        </div>
+                        <div class="space-y-2">
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-user-check text-warm-600 mr-2"></i>
+                            Identity Platform
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-key text-warm-600 mr-2"></i>
+                            Cloud KMS
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-chart-line text-warm-600 mr-2"></i>
+                            Cloud Monitoring
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Estrategia de Localización de Datos</h4>
+                      <p class="text-sage-700 mb-4">
+                        Aunque GCP no tiene una región específica en Argentina, se recomienda evaluar una estrategia multi-cloud o híbrida para componentes críticos donde la residencia de datos sea requerida.
+                      </p>
+
+                      <div class="space-y-3">
+                        <div class="bg-sage-50 rounded-lg p-4">
+                          <h5 class="font-semibold text-sage-800 text-sm">Opciones Locales</h5>
+                          <ul class="text-xs text-sage-600 mt-2 space-y-1">
+                            <li>• Telecom Argentina (Telecom Cloud)</li>
+                            <li>• Nuthost</li>
+                            <li>• Donweb</li>
+                          </ul>
+                        </div>
+
+                        <div class="bg-sage-50 rounded-lg p-4">
+                          <h5 class="font-semibold text-sage-800 text-sm">Regiones Cercanas</h5>
+                          <ul class="text-xs text-sage-600 mt-2 space-y-1">
+                            <li>• São Paulo, Brasil</li>
+                            <li>• Santiago, Chile</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+                      <h4 class="font-semibold text-green-800 mb-3">
+                        <i class="fas fa-shield-alt text-green-600 mr-2"></i>
+                        Seguridad y SLA
+                      </h4>
+                      <p class="text-green-700 text-sm">
+                        Establecer acuerdos de nivel de servicio (SLAs) que garanticen la seguridad y privacidad de los datos según estándares argentinos e internacionales, especialmente para el manejo de información legal sensible.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Security -->
+            <div id="security">
+              <div class="max-w-4xl mx-auto">
+                <h3 class="font-serif text-3xl font-semibold text-sage-800 mb-8">Medidas de Seguridad Indispensables</h3>
+
+                <div class="space-y-8">
+                  <div class="bg-red-50 border border-red-200 rounded-xl p-6">
+                    <h4 class="font-semibold text-red-800 mb-4">
+                      <i class="fas fa-exclamation-triangle text-red-600 mr-2"></i>
+                      La naturaleza sensible de los documentos legales exige medidas de seguridad robustas y multifacéticas
+                    </h4>
+                    <p class="text-red-700 text-sm">
+                      Estas medidas deben abordar la protección de datos en todos sus estados (en tránsito, en uso y en reposo), garantizar la identidad de usuarios, mantener la integridad de registros y defender contra amenazas comunes.
+                    </p>
+                  </div>
+
+                  <div class="grid lg:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                      <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                        <h4 class="font-semibold text-sage-800 mb-4 flex items-center">
+                          <i class="fas fa-lock text-blue-600 mr-3"></i>
+                          Cifrado de Datos
+                        </h4>
+
+                        <div class="space-y-4">
+                          <div class="border-l-4 border-blue-400 pl-4">
+                            <h5 class="font-semibold text-sage-800 text-sm">En Tránsito</h5>
+                            <p class="text-xs text-sage-600">TLS 1.2+ con certificados SSL/TLS válidos</p>
+                          </div>
+                          <div class="border-l-4 border-green-400 pl-4">
+                            <h5 class="font-semibold text-sage-800 text-sm">En Reposo</h5>
+                            <p class="text-xs text-sage-600">Cifrado de disco, CMEK, protección a nivel de aplicación</p>
+                          </div>
+                          <div class="border-l-4 border-purple-400 pl-4">
+                            <h5 class="font-semibold text-sage-800 text-sm">En Uso</h5>
+                            <p class="text-xs text-sage-600">Procesamiento de datos cifrados, enclaves seguros</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                        <h4 class="font-semibold text-sage-800 mb-4 flex items-center">
+                          <i class="fas fa-user-shield text-green-600 mr-3"></i>
+                          Autenticación y Autorización
+                        </h4>
+
+                        <div class="space-y-3">
+                          <div class="flex items-center justify-between">
+                            <span class="text-sm text-sage-700">Autenticación de Dos Factores (2FA)</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-semibold">Obligatoria</span>
+                          </div>
+                          <div class="text-sm text-sage-600">
+                            Gestión de Identidad y Acceso (IAM) con RBAC/ABAC y principio de menor privilegio
+                          </div>
+                          <div class="text-sm text-sage-600">
+                            Almacenamiento seguro de credenciales con funciones de hash fuertes (bcrypt, Argon2)
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                        <h4 class="font-semibold text-sage-800 mb-4 flex items-center">
+                          <i class="fas fa-shield-alt text-purple-600 mr-3"></i>
+                          Protección de la Aplicación
+                        </h4>
+
+                        <div class="space-y-2 text-sm">
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-bug text-warm-600 mr-2"></i>
+                            Mitigación OWASP Top 10 (inyección SQL, XSS, CSRF)
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-fire text-warm-600 mr-2"></i>
+                            Firewall de Aplicaciones Web (WAF)
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-network-wired text-warm-600 mr-2"></i>
+                            Protección contra DDoS
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-download text-warm-600 mr-2"></i>
+                            Actualizaciones y parches regulares
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="space-y-6">
+                      <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                        <h4 class="font-semibold text-sage-800 mb-4 flex items-center">
+                          <i class="fas fa-search text-orange-600 mr-3"></i>
+                          Registro y Monitoreo
+                        </h4>
+
+                        <div class="space-y-4">
+                          <div class="bg-orange-50 rounded-lg p-4">
+                            <h5 class="font-semibold text-orange-800 text-sm">Registros de Auditoría Inmutables</h5>
+                            <p class="text-xs text-orange-700 mt-1">
+                              Capturar todas las acciones significativas (inicios de sesión, accesos a documentos, modificaciones, firmas)
+                            </p>
+                          </div>
+
+                          <div class="bg-orange-50 rounded-lg p-4">
+                            <h5 class="font-semibold text-orange-800 text-sm">Sellado de Tiempo (Timestamping)</h5>
+                            <p class="text-xs text-orange-700 mt-1">
+                              Para eventos críticos, usar servicio TSA confiable para demostrar existencia y no alteración
+                            </p>
+                          </div>
+
+                          <div class="bg-orange-50 rounded-lg p-4">
+                            <h5 class="font-semibold text-orange-800 text-sm">Monitoreo Continuo</h5>
+                            <p class="text-xs text-orange-700 mt-1">
+                              Detección de actividades sospechosas y posibles brechas con alertas configuradas
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                        <h4 class="font-semibold text-sage-800 mb-4 flex items-center">
+                          <i class="fas fa-gavel text-indigo-600 mr-3"></i>
+                          Cumplimiento Normativo
+                        </h4>
+
+                        <div class="space-y-3">
+                          <div class="border-l-4 border-indigo-400 pl-4">
+                            <h5 class="font-semibold text-sage-800 text-sm">Protección de Datos Personales</h5>
+                            <p class="text-xs text-sage-600">
+                              Cumplir con Ley Argentina N° 25.326 y su decreto reglamentario 1558/2001
+                            </p>
+                          </div>
+
+                          <div class="border-l-4 border-indigo-400 pl-4">
+                            <h5 class="font-semibold text-sage-800 text-sm">Políticas y Términos</h5>
+                            <p class="text-xs text-sage-600">
+                              Políticas claras y transparentes de privacidad y términos de servicio
+                            </p>
+                          </div>
+
+                          <div class="border-l-4 border-indigo-400 pl-4">
+                            <h5 class="font-semibold text-sage-800 text-sm">Evaluaciones de Impacto</h5>
+                            <p class="text-xs text-sage-600">
+                              Realizar PIAs para identificar y mitigar riesgos asociados con datos personales
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                        <h4 class="font-semibold text-blue-800 mb-3">
+                          <i class="fas fa-sync-alt text-blue-600 mr-2"></i>
+                          Copias de Seguridad y DR
+                        </h4>
+                        <p class="text-blue-700 text-sm mb-3">
+                          Implementar estrategia robusta de copias de seguridad y recuperación ante desastres.
+                        </p>
+                        <ul class="text-xs text-blue-600 space-y-1">
+                          <li>• Copias de seguridad regulares</li>
+                          <li>• Almacenamiento seguro en ubicación geográfica diferente</li>
+                          <li>• Pruebas periódicas de procedimientos de restauración</li>
+                          <li>• Definición de RTO y RPO</li>
+                        </ul>
+                      </div>
+
+                      <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+                        <h4 class="font-semibold text-green-800 mb-3">
+                          <i class="fas fa-code text-green-600 mr-2"></i>
+                          DevSecOps
+                        </h4>
+                        <p class="text-green-700 text-sm">
+                          Integrar prácticas de seguridad en todo el ciclo de vida de desarrollo de software (SDLC), desde diseño y codificación hasta pruebas, despliegue y operaciones, incluyendo revisión de código, pruebas de seguridad automatizadas y gestión de vulnerabilidades.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MVP Features Section -->
+      <section class="py-20 bg-sage-50" id="mvp-features">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
+          <div class="text-center mb-16">
+            <h2 class="font-serif text-4xl font-semibold text-sage-800 mb-4">Funcionalidades Clave del MVP</h2>
+            <p class="text-xl text-sage-600 max-w-3xl mx-auto">Producto Mínimo Viable centrado en resolver las principales ineficiencias del proceso actual</p>
+            <div class="w-24 h-1 bg-warm-400 mx-auto mt-6"></div>
+          </div>
+
+          <div class="space-y-16">
+            <!-- Document Management -->
+            <div id="document-management">
+              <div class="max-w-4xl mx-auto">
+                <h3 class="font-serif text-3xl font-semibold text-sage-800 mb-8">Gestión de Documentos</h3>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                  <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4 flex items-center">
+                        <i class="fas fa-upload text-blue-600 mr-3"></i>
+                        Carga de Documentos
+                      </h4>
+                      <ul class="space-y-2 text-sm text-sage-700">
+                        <li class="flex items-start">
+                          <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                          Carga individual o múltiple en diversos formatos (PDF, DOC, DOCX, ODT)
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                          Interfaz intuitiva con arrastrar y soltar
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                          Validación de tipo de archivo y tamaño máximo
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4 flex items-center">
+                        <i class="fas fa-shield-alt text-green-600 mr-3"></i>
+                        Almacenamiento Seguro
+                      </h4>
+                      <ul class="space-y-2 text-sm text-sage-700">
+                        <li class="flex items-start">
+                          <i class="fas fa-lock text-green-500 mr-2 mt-1"></i>
+                          Cifrado en reposo (Google Cloud Storage)
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-key text-green-500 mr-2 mt-1"></i>
+                          Controles de acceso estrictos
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-link text-green-500 mr-2 mt-1"></i>
+                          Asociación a caso/cliente específico
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4 flex items-center">
+                        <i class="fas fa-folder text-purple-600 mr-3"></i>
+                        Organización Avanzada
+                      </h4>
+                      <ul class="space-y-2 text-sm text-sage-700">
+                        <li class="flex items-start">
+                          <i class="fas fa-sitemap text-purple-500 mr-2 mt-1"></i>
+                          Estructura clara por &#34;Caso&#34; o &#34;Cliente&#34;
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-tags text-purple-500 mr-2 mt-1"></i>
+                          Sistemas de etiquetado y filtros avanzados
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-search text-purple-500 mr-2 mt-1"></i>
+                          Búsqueda full-text y por metadatos
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4 flex items-center">
+                        <i class="fas fa-eye text-orange-600 mr-3"></i>
+                        Visualización y Compartición
+                      </h4>
+                      <div class="space-y-4">
+                        <div class="bg-orange-50 rounded-lg p-4">
+                          <h5 class="font-semibold text-orange-800 text-sm mb-2">Visualización Directa</h5>
+                          <p class="text-xs text-orange-700">
+                            Visualización de documentos directamente en el navegador, sin necesidad de descargarlos o abrir aplicaciones externas.
+                          </p>
+                        </div>
+
+                        <div class="bg-orange-50 rounded-lg p-4">
+                          <h5 class="font-semibold text-orange-800 text-sm mb-2">Compartición Controlada</h5>
+                          <p class="text-xs text-orange-700">
+                            Posibilidad de compartir documentos de forma controlada, tanto dentro de la plataforma como externamente, con opciones para definir permisos de visualización, edición o comentarios.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                      <h4 class="font-semibold text-blue-800 mb-3">
+                        <i class="fas fa-info-circle text-blue-600 mr-2"></i>
+                        Beneficios Clave
+                      </h4>
+                      <p class="text-blue-700 text-sm mb-3">
+                        Esta funcionalidad es el núcleo de la plataforma y debe permitir a los abogados y sus clientes cargar, almacenar, organizar y acceder a los documentos legales de manera segura y eficiente.
+                      </p>
+                      <p class="text-blue-700 text-sm">
+                        La interfaz debe ser intuitiva y centrada en el usuario, facilitando la gestión documental sin sacrificar la seguridad ni la organización.
+                      </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Características Adicionales</h4>
+                      <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div class="space-y-2">
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-preview text-warm-600 mr-2"></i>
+                            Vista previa de documentos
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-download text-warm-600 mr-2"></i>
+                            Descarga selectiva
+                          </div>
+                        </div>
+                        <div class="space-y-2">
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-sort text-warm-600 mr-2"></i>
+                            Ordenamiento inteligente
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-filter text-warm-600 mr-2"></i>
+                            Filtros avanzados
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Version Control -->
+            <div id="version-control">
+              <div class="max-w-4xl mx-auto">
+                <h3 class="font-serif text-3xl font-semibold text-sage-800 mb-8">Control de Versiones</h3>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                  <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">¿Por qué es indispensable?</h4>
+                      <p class="text-sage-700 mb-4">
+                        El Control de Versiones es fundamental para cualquier plataforma que maneje documentos sujetos a revisiones y modificaciones, como es el caso de los documentos legales.
+                      </p>
+
+                      <div class="bg-sage-50 rounded-lg p-4">
+                        <p class="text-sm text-sage-600">
+                          Esta funcionalidad debe permitir rastrear de manera precisa y detallada todos los cambios realizados en un documento a lo largo de su ciclo de vida.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Funcionamiento Automático</h4>
+                      <ul class="space-y-2 text-sm text-sage-700">
+                        <li class="flex items-start">
+                          <i class="fas fa-save text-blue-500 mr-2 mt-1"></i>
+                          Creación automática de nueva versión al modificar y guardar
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-history text-blue-500 mr-2 mt-1"></i>
+                          Conservación intacta de la versión anterior
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-user-clock text-blue-500 mr-2 mt-1"></i>
+                          Registro de quién, cuándo y qué cambios se realizaron
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Historial Completo</h4>
+                      <p class="text-sage-700 text-sm mb-3">
+                        Mantener un historial completo de todas las versiones de cada documento, incluyendo:
+                      </p>
+                      <ul class="space-y-1 text-xs text-sage-600">
+                        <li>• Identidad del usuario que realizó la modificación</li>
+                        <li>• Fecha y hora exacta del cambio</li>
+                        <li>• Resumen de los cambios introducidos (comparación de diferencias)</li>
+                        <li>• Posibilidad de revertir a versiones anteriores</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Interfaz de Gestión de Versiones</h4>
+
+                      <div class="space-y-4">
+                        <div class="border-l-4 border-green-400 pl-4">
+                          <h5 class="font-semibold text-sage-800 text-sm">Visualización del Historial</h5>
+                          <p class="text-xs text-sage-600">
+                            Interfaz clara para visualizar el historial de versiones de un documento
+                          </p>
+                        </div>
+
+                        <div class="border-l-4 border-blue-400 pl-4">
+                          <h5 class="font-semibold text-sage-800 text-sm">Comparación de Versiones</h5>
+                          <p class="text-xs text-sage-600">
+                            Comparar diferentes versiones lado a lado para identificar cambios específicos
+                          </p>
+                        </div>
+
+                        <div class="border-l-4 border-purple-400 pl-4">
+                          <h5 class="font-semibold text-sage-800 text-sm">Restauración</h5>
+                          <p class="text-xs text-sage-600">
+                            Descarga de versiones específicas o restauración de versiones anteriores
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+                      <h4 class="font-semibold text-green-800 mb-3">
+                        <i class="fas fa-shield-alt text-green-600 mr-2"></i>
+                        Eficiencia y Seguridad
+                      </h4>
+                      <p class="text-green-700 text-sm mb-3">
+                        El sistema de control de versiones debe ser robusto y eficiente en el manejo del almacenamiento, evitando la duplicación innecesaria de contenido si las diferencias entre versiones son menores.
+                      </p>
+                      <p class="text-green-700 text-sm">
+                        Esta funcionalidad es crucial para mantener la integridad de los documentos legales y facilitar la colaboración entre abogados y clientes.
+                      </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Beneficios Clave</h4>
+                      <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div class="space-y-2">
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-undo text-warm-600 mr-2"></i>
+                            Recuperación ante errores
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-users text-warm-600 mr-2"></i>
+                            Colaboración mejorada
+                          </div>
+                        </div>
+                        <div class="space-y-2">
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-search text-warm-600 mr-2"></i>
+                            Trazabilidad completa
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-check-circle text-warm-600 mr-2"></i>
+                            Integridad documental
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Signature Flow -->
+            <div id="signature-flow">
+              <div class="max-w-4xl mx-auto">
+                <h3 class="font-serif text-3xl font-semibold text-sage-800 mb-8">Flujo de Firma Digital y Electrónica</h3>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                  <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Proceso Intuitivo</h4>
+                      <p class="text-sage-700 mb-4">
+                        El Flujo de Firma es una funcionalidad central diseñada para agilizar y asegurar el proceso de firma de documentos legales.
+                      </p>
+
+                      <div class="space-y-3">
+                        <div class="flex items-start">
+                          <i class="fas fa-user-tie text-blue-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-sage-800">Para Abogados</strong>
+                            <p class="text-sm text-sage-600">Envío de documentos a firmar a clientes u otras partes</p>
+                          </div>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-users text-green-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-sage-800">Para Clientes</strong>
+                            <p class="text-sm text-sage-600">Firma sencilla y segura desde la plataforma</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Configuración Avanzada</h4>
+                      <ul class="space-y-2 text-sm text-sage-700">
+                        <li class="flex items-start">
+                          <i class="fas fa-list-ol text-purple-500 mr-2 mt-1"></i>
+                          Configuración de órdenes de firma (secuencia definida)
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-user-plus text-purple-500 mr-2 mt-1"></i>
+                          Múltiples firmantes en un mismo documento
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-compass text-purple-500 mr-2 mt-1"></i>
+                          Guía paso a paso para cada firmante
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-mouse-pointer text-purple-500 mr-2 mt-1"></i>
+                          Indicación clara de dónde y cómo firmar
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                      <h4 class="font-semibold text-blue-800 mb-3">
+                        <i class="fas fa-certificate text-blue-600 mr-2"></i>
+                        Tipos de Firma Disponibles
+                      </h4>
+                      <div class="space-y-3">
+                        <div class="bg-white rounded-lg p-4">
+                          <h5 class="font-semibold text-sage-800 text-sm mb-2">Firma Digital</h5>
+                          <p class="text-xs text-sage-600">
+                            Para documentos que requieran máxima validez legal y presunciones de autoría e integridad. Integración con ACs licenciadas.
+                          </p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                          <h5 class="font-semibold text-sage-800 text-sm mb-2">Firma Electrónica</h5>
+                          <p class="text-xs text-sage-600">
+                            Para documentos donde la formalidad de la firma digital no sea estrictamente necesaria pero se desee un método de consentimiento ágil.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Métodos de Firma Digital</h4>
+
+                      <div class="space-y-4">
+                        <div class="border-l-4 border-blue-400 pl-4">
+                          <h5 class="font-semibold text-sage-800 text-sm">Tokens Físicos</h5>
+                          <p class="text-xs text-sage-600">USB criptográficos o Smart Cards que almacenan claves de forma segura</p>
+                        </div>
+
+                        <div class="border-l-4 border-green-400 pl-4">
+                          <h5 class="font-semibold text-sage-800 text-sm">Certificados Software</h5>
+                          <p class="text-xs text-sage-600">Instalados directamente en la computadora del usuario</p>
+                        </div>
+
+                        <div class="border-l-4 border-purple-400 pl-4">
+                          <h5 class="font-semibold text-sage-800 text-sm">Firma Remota (Nube)</h5>
+                          <p class="text-xs text-sage-600">Custodia centralizada de claves en HSM con autenticación multifactor</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Métodos de Firma Electrónica</h4>
+
+                      <div class="space-y-3">
+                        <div class="flex items-start">
+                          <i class="fas fa-key text-orange-500 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-sage-800 text-sm">PIN + OTP</strong>
+                            <p class="text-xs text-sage-600">Firma con PIN y contraseña de un solo uso</p>
+                          </div>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-envelope text-orange-500 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-sage-800 text-sm">Enlace por Correo</strong>
+                            <p class="text-xs text-sage-600">Firma mediante enlace enviado al correo del firmante</p>
+                          </div>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-check text-orange-500 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-sage-800 text-sm">Aceptación Simple</strong>
+                            <p class="text-xs text-sage-600">Aceptación de términos con registro de IP y marca de tiempo</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+                      <h4 class="font-semibold text-green-800 mb-3">
+                        <i class="fas fa-file-contract text-green-600 mr-2"></i>
+                        Comprobante de Firma
+                      </h4>
+                      <p class="text-green-700 text-sm mb-3">
+                        La plataforma debe generar un comprobante de firma para cada documento, detallando:
+                      </p>
+                      <ul class="text-xs text-green-600 space-y-1">
+                        <li>• Identidad del firmante</li>
+                        <li>• Fecha y hora exacta de la firma</li>
+                        <li>• Tipo de firma utilizada</li>
+                        <li>• Información de verificación</li>
+                      </ul>
+                      <p class="text-green-700 text-sm mt-3">
+                        Es crucial que el proceso garantice la integridad del documento y la no repudiación de la firma.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Traceability -->
+            <div id="traceability">
+              <div class="max-w-4xl mx-auto">
+                <h3 class="font-serif text-3xl font-semibold text-sage-800 mb-8">Trazabilidad Completa con Sellado de Tiempo</h3>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                  <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Registro Detallado e Inmutable</h4>
+                      <p class="text-sage-700 mb-4">
+                        La Trazabilidad Completa es fundamental para una plataforma que maneja documentos legales sensibles. Debe proporcionar un registro detallado de todas las acciones significativas realizadas sobre cada documento.
+                      </p>
+
+                      <div class="bg-sage-50 rounded-lg p-4">
+                        <h5 class="font-semibold text-sage-800 text-sm mb-2">Acciones registradas incluyen:</h5>
+                        <ul class="text-xs text-sage-600 space-y-1">
+                          <li>• Creación de usuarios e inicio de sesión</li>
+                          <li>• Carga, modificación y visualización de documentos</li>
+                          <li>• Compartición y cambios en permisos</li>
+                          <li>• Firmas digitales y electrónicas</li>
+                          <li>• Cambios en estados de documentos</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Información de Auditoría</h4>
+                      <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div class="space-y-2">
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-user text-warm-600 mr-2"></i>
+                            Identidad del usuario
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-clock text-warm-600 mr-2"></i>
+                            Fecha y hora exactas
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-map-marker-alt text-warm-600 mr-2"></i>
+                            Dirección IP de origen
+                          </div>
+                        </div>
+                        <div class="space-y-2">
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-info-circle text-warm-600 mr-2"></i>
+                            Detalles específicos
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-shield-alt text-warm-600 mr-2"></i>
+                            Integridad protegida
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-code text-warm-600 mr-2"></i>
+                            Hash criptográfico
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Dashboard de Consulta</h4>
+                      <p class="text-sage-700 text-sm mb-3">
+                        La plataforma debe ofrecer un dashboard o interfaz de consulta que permita a los usuarios autorizados acceder y revisar fácilmente la trazabilidad completa de los documentos de su interés.
+                      </p>
+                      <div class="bg-sage-50 rounded-lg p-4">
+                        <p class="text-xs text-sage-600">
+                          Los abogados a cargo de un caso deben tener acceso completo al historial de auditoría de todos los documentos relacionados con ese caso.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4 flex items-center">
+                        <i class="fas fa-stamp text-red-600 mr-3"></i>
+                        Sellado de Tiempo (Timestamping)
+                      </h4>
+
+                      <div class="space-y-4">
+                        <div class="bg-red-50 rounded-lg p-4">
+                          <h5 class="font-semibold text-red-800 text-sm mb-2">¿Por qué es indispensable?</h5>
+                          <p class="text-xs text-red-700">
+                            Para reforzar la validez probatoria de los registros, especialmente para eventos críticos como la firma de un documento.
+                          </p>
+                        </div>
+
+                        <div class="border-l-4 border-red-400 pl-4">
+                          <h5 class="font-semibold text-sage-800 text-sm">Integración con TSA</h5>
+                          <p class="text-xs text-sage-600">
+                            Integración con una Autoridad de Sellado de Tiempo (TSA) confiable y reconocida
+                          </p>
+                        </div>
+
+                        <div class="border-l-4 border-red-400 pl-4">
+                          <h5 class="font-semibold text-sage-800 text-sm">Certificación Temporal</h5>
+                          <p class="text-xs text-sage-600">
+                            Certifica la hora exacta en que un documento fue firmado o un evento fue registrado
+                          </p>
+                        </div>
+
+                        <div class="border-l-4 border-red-400 pl-4">
+                          <h5 class="font-semibold text-sage-800 text-sm">Vinculación Criptográfica</h5>
+                          <p class="text-xs text-sage-600">
+                            Sello de tiempo vinculado criptográficamente al documento o registro del evento
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                      <h4 class="font-semibold text-blue-800 mb-3">
+                        <i class="fas fa-gavel text-blue-600 mr-2"></i>
+                        Beneficios Legales
+                      </h4>
+                      <div class="space-y-3">
+                        <div class="flex items-start">
+                          <i class="fas fa-check text-blue-600 mr-2 mt-1"></i>
+                          <span class="text-blue-700 text-sm">
+                            <strong>Prueba fehaciente:</strong> Demuestra que la acción ocurrió en un momento específico
+                          </span>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-check text-blue-600 mr-2 mt-1"></i>
+                          <span class="text-blue-700 text-sm">
+                            <strong>No repudiación:</strong> Evita que se niegue la realización de una acción
+                          </span>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-check text-blue-600 mr-2 mt-1"></i>
+                          <span class="text-blue-700 text-sm">
+                            <strong>Cumplimiento normativo:</strong> Satisface requisitos legales y regulatorios
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Protección de Integridad</h4>
+                      <div class="space-y-3">
+                        <div class="flex items-start">
+                          <i class="fas fa-lock text-green-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-sage-800 text-sm">Inmutabilidad</strong>
+                            <p class="text-xs text-sage-600">Registros protegidos contra modificaciones no autorizadas</p>
+                          </div>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-hashtag text-green-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-sage-800 text-sm">Hash Criptográfico</strong>
+                            <p class="text-xs text-sage-600">Mecanismos de integridad para garantizar inalterabilidad</p>
+                          </div>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-archive text-green-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-sage-800 text-sm">Almacenamiento Seguro</strong>
+                            <p class="text-xs text-sage-600">Registros almacenados de forma segura con copias de respaldo</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notifications -->
+            <div id="notifications">
+              <div class="max-w-4xl mx-auto">
+                <h3 class="font-serif text-3xl font-semibold text-sage-800 mb-8">Sistema de Notificaciones</h3>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                  <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Características Principales</h4>
+                      <p class="text-sage-700 mb-4">
+                        Un Sistema de Notificaciones robusto y configurable es esencial para mantener a los abogados y clientes informados sobre actividades relevantes y acciones requeridas.
+                      </p>
+
+                      <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div class="space-y-2">
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-envelope text-warm-600 mr-2"></i>
+                            Correo electrónico
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-bell text-warm-600 mr-2"></i>
+                            Notificaciones internas
+                          </div>
+                        </div>
+                        <div class="space-y-2">
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-comment-alt text-warm-600 mr-2"></i>
+                            SMS (futuro)
+                          </div>
+                          <div class="flex items-center text-sage-700">
+                            <i class="fas fa-mobile-alt text-warm-600 mr-2"></i>
+                            Push móvil (futuro)
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4 flex items-center">
+                        <i class="fas fa-users text-blue-600 mr-3"></i>
+                        Notificaciones para Clientes
+                      </h4>
+                      <ul class="space-y-2 text-sm text-sage-700">
+                        <li class="flex items-start">
+                          <i class="fas fa-file-signature text-blue-500 mr-2 mt-1"></i>
+                          Nuevo documento asignado para revisión o firma
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-clock text-blue-500 mr-2 mt-1"></i>
+                          Recordatorios de documentos pendientes
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-check-circle text-blue-500 mr-2 mt-1"></i>
+                          Confirmación de firma correcta
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-comment text-blue-500 mr-2 mt-1"></i>
+                          Mensajes o comentarios del abogado
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-chart-line text-blue-500 mr-2 mt-1"></i>
+                          Cambios en el estado de su caso
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4 flex items-center">
+                        <i class="fas fa-user-tie text-green-600 mr-3"></i>
+                        Notificaciones para Abogados
+                      </h4>
+                      <ul class="space-y-2 text-sm text-sage-700">
+                        <li class="flex items-start">
+                          <i class="fas fa-upload text-green-500 mr-2 mt-1"></i>
+                          Cliente carga nuevo documento o versión
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-signature text-green-500 mr-2 mt-1"></i>
+                          Cliente completa firma de documento
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-exclamation-triangle text-green-500 mr-2 mt-1"></i>
+                          Alertas sobre documentos que requieren revisión
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-shield-alt text-green-500 mr-2 mt-1"></i>
+                          Actividades sospechosas o accesos no autorizados
+                        </li>
+                        <li class="flex items-start">
+                          <i class="fas fa-calendar text-green-500 mr-2 mt-1"></i>
+                          Recordatorios de fechas límite o vencimientos
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Configuración y Personalización</h4>
+
+                      <div class="space-y-4">
+                        <div class="bg-sage-50 rounded-lg p-4">
+                          <h5 class="font-semibold text-sage-800 text-sm mb-2">Configuración por Usuario</h5>
+                          <p class="text-xs text-sage-600">
+                            Los usuarios pueden elegir qué tipos de notificaciones desean recibir y a través de qué canales.
+                          </p>
+                        </div>
+
+                        <div class="bg-sage-50 rounded-lg p-4">
+                          <h5 class="font-semibold text-sage-800 text-sm mb-2">Control de Frecuencia</h5>
+                          <p class="text-xs text-sage-600">
+                            Evita la saturación de alertas y asegura que los usuarios reciban solo información relevante.
+                          </p>
+                        </div>
+
+                        <div class="bg-sage-50 rounded-lg p-4">
+                          <h5 class="font-semibold text-sage-800 text-sm mb-2">Preferencias Granulares</h5>
+                          <p class="text-xs text-sage-600">
+                            Configuración específica por tipo de documento, caso o nivel de urgencia.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-purple-50 border border-purple-200 rounded-xl p-6">
+                      <h4 class="font-semibold text-purple-800 mb-3">
+                        <i class="fas fa-lightbulb text-purple-600 mr-2"></i>
+                        Beneficios del Sistema
+                      </h4>
+                      <div class="space-y-3 text-sm">
+                        <div class="flex items-start">
+                          <i class="fas fa-handshake text-purple-600 mr-2 mt-1"></i>
+                          <span class="text-purple-700">Mejora la colaboración entre abogados y clientes</span>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-user-check text-purple-600 mr-2 mt-1"></i>
+                          <span class="text-purple-700">Aumenta la responsabilidad y seguimiento</span>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-rocket text-purple-600 mr-2 mt-1"></i>
+                          <span class="text-purple-700">Experiencia de usuario más fluida y proactiva</span>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-clock text-purple-600 mr-2 mt-1"></i>
+                          <span class="text-purple-700">Reduce tiempos de respuesta y retrasos</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-sage-200">
+                      <h4 class="font-semibold text-sage-800 mb-4">Requisitos Técnicos</h4>
+                      <div class="space-y-3 text-sm">
+                        <div class="flex items-start">
+                          <i class="fas fa-link text-warm-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-sage-800">Enlaces Directos</strong>
+                            <p class="text-xs text-sage-600">Notificaciones deben incluir enlaces a la acción requerida</p>
+                          </div>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-mobile-alt text-warm-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-sage-800">Diseño Responsivo</strong>
+                            <p class="text-xs text-sage-600">Notificaciones optimizadas para distintos dispositivos</p>
+                          </div>
+                        </div>
+                        <div class="flex items-start">
+                          <i class="fas fa-chart-bar text-warm-600 mr-3 mt-1"></i>
+                          <div>
+                            <strong class="text-sage-800">Métricas</strong>
+                            <p class="text-xs text-sage-600">Seguimiento de entregas, aperturas y clics</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+                      <h4 class="font-semibold text-yellow-800 mb-3">
+                        <i class="fas fa-cog text-yellow-600 mr-2"></i>
+                        Configuración Predeterminada
+                      </h4>
+                      <p class="text-yellow-700 text-sm mb-3">
+                        La plataforma debe incluir una configuración predeterminada sensata que active las notificaciones más importantes para cada tipo de usuario, permitiendo luego la personalización según preferencias individuales.
+                      </p>
+                      <p class="text-yellow-700 text-sm">
+                        Esto asegura una buena experiencia desde el primer uso sin requerir una configuración extensa inicial.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="bg-sage-800 text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
+          <div class="text-center">
+            <p class="text-sage-200 mb-4">
+              Plataforma SaaS para la Gestión de Documentos Legales en Argentina
+            </p>
+            <p class="text-sm text-sage-400">
+              Fundamentada en la Ley 25.506 de Firma Digital y tecnologías modernas de desarrollo
+            </p>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+        // Mobile TOC Toggle
+        const tocToggle = document.getElementById('toc-toggle');
+        const toc = document.getElementById('toc');
+        const tocOverlay = document.getElementById('toc-overlay');
+
+        function toggleToc() {
+            const isOpen = !toc.classList.contains('-translate-x-full');
+            toc.classList.toggle('-translate-x-full');
+            tocOverlay.classList.toggle('hidden', !isOpen);
+        }
+
+        tocToggle.addEventListener('click', toggleToc);
+
+        // Close TOC when clicking on overlay or outside
+        tocOverlay.addEventListener('click', toggleToc);
+        document.addEventListener('click', (e) => {
+            if (!toc.contains(e.target) && !tocToggle.contains(e.target)) {
+                if (!toc.classList.contains('-translate-x-full')) {
+                    toggleToc();
+                }
+            }
+        });
+
+        // Close TOC when window is resized to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                if (!toc.classList.contains('-translate-x-full')) {
+                    toggleToc();
+                }
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close mobile TOC if open
+                    if (window.innerWidth < 1024) {
+                        toc.classList.add('-translate-x-full');
+                    }
+                }
+            });
+        });
+
+        // Highlight active section in TOC
+        const sections = document.querySelectorAll('section[id]');
+        const tocLinks = document.querySelectorAll('#toc a[href^="#"]');
+
+        function highlightActiveSection() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('text-warm-600', 'font-semibold');
+                link.classList.add('text-sage-600');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.remove('text-sage-600');
+                    link.classList.add('text-warm-600', 'font-semibold');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightActiveSection);
+        highlightActiveSection(); // Initial call
+    </script>
+
+  
+
+</body></html>
